@@ -12,7 +12,7 @@ namespace MegaDeskWeb_Farrwest.Model
     public class Quote
     {
 
-        public Quote(int width, int depth, int numOfDrawers, int desktopMaterial, string customerName, int deliveryOptions)
+        public Quote(int width, int depth, int numOfDrawers, MaterialType desktopMaterial, string customerName, DeliveryOptions deliveryOptions)
         {
             // desktop material and deliveryOptions changed to ints so that is scaffolds easier.
             this.desktopMaterial = desktopMaterial;
@@ -65,12 +65,14 @@ namespace MegaDeskWeb_Farrwest.Model
         public int numOfDrawers { get; set; }
 
         [Display(Name = "Material")]
+        [Range(0,4)]
         [Required]
-        public int desktopMaterial { get; set; }
+        public MaterialType desktopMaterial { get; set; }
 
         [Display(Name = "Rush Order")]
+        [Range(0,2)]
         [Required]
-        public int deliveryOptions { get; set; }
+        public DeliveryOptions deliveryOptions { get; set; }
 
         [Display(Name = "Total Price")]
         [DataType(DataType.Currency)]
@@ -103,24 +105,24 @@ namespace MegaDeskWeb_Farrwest.Model
 
             switch (this.desktopMaterial)
             {
-                case 1:
+                case MaterialType.Oak:
                     deskTopMaterialPrice = PRICEFOROAKTOP;
                     break;
-                case 0:
+                case MaterialType.Laminate:
                     deskTopMaterialPrice = PRICEFORLAMINATETOP;
                     break;
-                case 2:
+                case MaterialType.Rosewood:
                     deskTopMaterialPrice = PRICEFORROSEWOODTOP;
                     break;
-                case 3:
+                case MaterialType.Veneer:
                     deskTopMaterialPrice = PRICEFORVENEERTOP;
                     break;
-                case 4:
+                case MaterialType.Pine:
                     deskTopMaterialPrice = PRICEFORPINETOP;
                     break;
             }
 
-            
+
 
             // This is where we read in from a file in the other assignment. Not sure if we need to do that again here.
             var rushOrderPrices = new int[3, 3] {
@@ -131,13 +133,13 @@ namespace MegaDeskWeb_Farrwest.Model
 
             switch (deliveryOptions)
             {
-                case 0:
+                case DeliveryOptions.Three:
                     deliveryPrice = ((deskSizePrice < 1000) ? rushOrderPrices[(int)DeliveryOptions.Three, 0] : (deskSizePrice > 1000 && deskSizePrice < 2000) ? rushOrderPrices[(int)DeliveryOptions.Three, 1] : rushOrderPrices[(int)DeliveryOptions.Three, 2]);
                     break;
-                case 1:
+                case DeliveryOptions.Five:
                     deliveryPrice = ((deskSizePrice < 1000) ? rushOrderPrices[(int)DeliveryOptions.Five, 0] : (deskSizePrice > 1000 && deskSizePrice < 2000) ? rushOrderPrices[(int)DeliveryOptions.Five, 1] : rushOrderPrices[(int)DeliveryOptions.Five, 2]);
                     break;
-                case 2:
+                case DeliveryOptions.Seven:
                     deliveryPrice = ((deskSizePrice < 1000) ? rushOrderPrices[(int)DeliveryOptions.Seven, 0] : (deskSizePrice > 1000 && deskSizePrice < 2000) ? rushOrderPrices[(int)DeliveryOptions.Seven, 1] : rushOrderPrices[(int)DeliveryOptions.Seven, 2]);
                     break;
             }
@@ -150,6 +152,11 @@ namespace MegaDeskWeb_Farrwest.Model
         public enum DeliveryOptions
         {
             Three, Five, Seven
+        }
+
+        public enum MaterialType
+        {
+            Laminate, Oak, Rosewood, Veneer, Pine
         }
     }
 }

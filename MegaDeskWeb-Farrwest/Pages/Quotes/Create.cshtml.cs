@@ -27,6 +27,11 @@ namespace MegaDeskWeb_Farrwest.Pages.Quotes
         [BindProperty]
         public Quote Quote { get; set; }
 
+        public void setDesktopMaterial(int material)
+        {
+            Console.WriteLine("TEST");
+        }
+
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {

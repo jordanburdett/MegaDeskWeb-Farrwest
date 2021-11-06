@@ -10,7 +10,7 @@
 <h4>Quote</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-7">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -35,12 +35,66 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quote.desktopMaterial" class="control-label"></label>
-                <input asp-for="Quote.desktopMaterial" class="form-control" />
+                <select asp-for="Quote.desktopMaterial" class="form-control" onchange="showImage(this)">
+                    <option value="">Select one...</option>
+                    <option value="0">Laminate</option>
+                    <option value="1">Oak</option>
+                    <option value="2">Rosewood</option>
+                    <option value="3">Veneer</option>
+                    <option value="4">Pine</option>
+                </select>
+                
+                <div class="img-thumbnail" id="materialImage" hidden>
+
+                </div>
                 <span asp-validation-for="Quote.desktopMaterial" class="text-danger"></span>
+                @*<div class="deskQuoteOptions" >
+            <div class="deskMaterialContainer">
+                <div class="containerLabel">
+                    Laminate
+                </div>
+                <img src="https://images.thdstatic.com/productImages/ac750a8b-9590-40c4-80c7-8a28c08767c9/svn/weathered-fiberwood-natural-grain-formica-laminate-sheets-0891412ng408000-64_100.jpg" alt="image of laminate" class="materialImage"/>
+            </div>
+
+            <div class="deskMaterialContainer">
+                <div class="containerLabel">
+                    Oak
+                </div>
+                <img src="https://mobileimages.lowes.com/productimages/066a1b5e-575c-4294-92e5-5196b87d007d/15357416.jpg?size=mthb" alt="Image of oak" class="materialImage"/>
+            </div>
+
+            <div class="deskMaterialContainer">
+                <div class="containerLabel">
+                    Rosewood
+                </div>
+                <img src="https://a.1stdibscdn.com/elliptical-bolivian-rosewood-center-hall-or-dining-table-for-sale/1121189/f_161920821569050890595/16192082_master.jpg?disable=upscale&auto=webp&quality=60&width=60" alt="image of Rosewood" class="materialImage"/>
+            </div>
+
+            <div class="deskMaterialContainer">
+                <div class="containerLabel">
+                    Veneer
+                </div>
+                <img src="https://www.ovisonline.com/GetImage.ashx?Path=%7e%2fAssets%2fProductImages%2fVeneerTech%2fStandard%2fOakWhitePlainSliced.jpg&maintainAspectRatio=true" alt="image of Pine" class="materialImage"/>
+            </div>
+
+            <div class="deskMaterialContainer">
+                <div class="containerLabel">
+                    Pine
+                </div>
+                <img src="https://thumbs.dreamstime.com/b/top-view-unfinished-pine-table-117065020.jpg" alt="image of laminate" class="materialImage"/>
+            </div>
+        </div>*@
+
+
             </div>
             <div class="form-group">
                 <label asp-for="Quote.deliveryOptions" class="control-label"></label>
-                <input asp-for="Quote.deliveryOptions" class="form-control" />
+                <select asp-for="Quote.deliveryOptions" class="form-control" >
+                    <option value="">Select one...</option>
+                    <option value="0">Three</option>
+                    <option value="1">Five</option>
+                    <option value="2">Seven</option>
+                </select>
                 <span asp-validation-for="Quote.deliveryOptions" class="text-danger"></span>
             </div>
             <div class="form-group">
