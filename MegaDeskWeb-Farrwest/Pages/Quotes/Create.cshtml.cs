@@ -30,6 +30,8 @@ namespace MegaDeskWeb_Farrwest.Pages.Quotes
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            Quote.totalPrice = Quote.calculateTotalPrice();
+
             if (!ModelState.IsValid)
             {
                 return Page();

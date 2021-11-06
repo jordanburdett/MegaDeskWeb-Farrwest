@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MegaDeskWeb_Farrwest.Model
 {
@@ -20,20 +24,59 @@ namespace MegaDeskWeb_Farrwest.Model
             this.numOfDrawers = numOfDrawers;
             this.customerName = customerName;
             this.totalPrice = calculateTotalPrice();
-            this.dateDisplayString = this.quoteDate.ToString();
+            this.dateDisplayString = this.quoteDate.ToShortDateString();
+        }
+
+        public Quote()
+        {
+            this.desktopMaterial = 0;
+            this.deliveryOptions = 0;
+
+
+            this.width = 0;
+            this.depth = 0;
+            this.numOfDrawers = 0;
+            this.customerName = "";
+            this.totalPrice = 0;
+            this.dateDisplayString = this.quoteDate.ToShortDateString();
         }
 
         public int ID { get; set; }
 
-        public int width { get; set; }
-        public int depth { get; set; }
-        public int numOfDrawers { get; set; }
-        public int desktopMaterial { get; set; }
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [StringLength(30)]
+        [Display(Name = "Name")]
+        [Required]
         public string customerName { get; set; }
+
+        [Range(24, 96)]
+        [Display(Name = "Width")]
+        [Required]
+        public int width { get; set; }
+
+        [Range(12, 48)]
+        [Display(Name = "Depth")]
+        [Required]
+        public int depth { get; set; }
+
+        [Range(0,7)]
+        [Display(Name = "# Drawers")]
+        [Required]
+        public int numOfDrawers { get; set; }
+
+        [Display(Name = "Material")]
+        [Required]
+        public int desktopMaterial { get; set; }
+
+        [Display(Name = "Rush Order")]
+        [Required]
         public int deliveryOptions { get; set; }
 
+        [Display(Name = "Total Price")]
+        [DataType(DataType.Currency)]
         public double totalPrice { get; set; }
 
+        [Display(Name = "Date")]
         public string dateDisplayString { get; set; }
 
         public DateTime quoteDate { get; set; } = DateTime.Now;
