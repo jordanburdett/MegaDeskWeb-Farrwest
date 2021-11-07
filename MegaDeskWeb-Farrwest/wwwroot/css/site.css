@@ -78,18 +78,6 @@ body {
 /*
     Styles for material selection
 */
-.deskQuoteOptions {
-    display: flex;
-    border: solid red 1px;
-    
-}
-
-.deskMaterialContainer {
-    text-align: center;
-    border: solid blue 1px;
-    margin: 5px;
-}
-
 .materialImage {
     width: 100px;
     height: 100px;
@@ -97,4 +85,14 @@ body {
 
 .containerLabel {
     text-align: center;
+}
+
+/*
+    Table styles
+*/
+
+.quoteRow {
+    padding: 10px;
+    border: solid black 1px;
+    margin-top: 10px;
 }

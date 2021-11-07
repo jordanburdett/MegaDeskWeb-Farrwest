@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MegaDeskWeb_Farrwest.Data;
 using MegaDeskWeb_Farrwest.Model;
@@ -14,6 +15,8 @@ namespace MegaDeskWeb_Farrwest.Pages.Quotes
     {
         private readonly MegaDeskWeb_Farrwest.Data.MegaDeskWeb_FarrwestContext _context;
 
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         public IndexModel(MegaDeskWeb_Farrwest.Data.MegaDeskWeb_FarrwestContext context)
         {
             _context = context;
@@ -23,7 +26,15 @@ namespace MegaDeskWeb_Farrwest.Pages.Quotes
 
         public async Task OnGetAsync()
         {
-            Quote = await _context.Quote.ToListAsync();
+            var quotes = from m in _context.Quote select m;
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                quotes = quotes.Where(s => s.customerName.Contains(SearchString));
+            }
+
+
+            Quote = await quotes.ToListAsync();
         }
     }
 }
