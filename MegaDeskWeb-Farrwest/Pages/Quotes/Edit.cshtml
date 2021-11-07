@@ -31,7 +31,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quote.desktopMaterial" class="control-label"></label>
-                <input asp-for="Quote.desktopMaterial" class="form-control" />
+                <select asp-for="Quote.desktopMaterial" class="form-control">
+                    <option value="">Select one...</option>
+                    <option value="0">Laminate</option>
+                    <option value="1">Oak</option>
+                    <option value="2">Rosewood</option>
+                    <option value="3">Veneer</option>
+                    <option value="4">Pine</option>
+                </select>
                 <span asp-validation-for="Quote.desktopMaterial" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -41,7 +48,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quote.deliveryOptions" class="control-label"></label>
-                <input asp-for="Quote.deliveryOptions" class="form-control" />
+                <select asp-for="Quote.deliveryOptions" class="form-control">
+                    <option value="">Select one...</option>
+                    <option value="0">Three</option>
+                    <option value="1">Five</option>
+                    <option value="2">Seven</option>
+                </select>
                 <span asp-validation-for="Quote.deliveryOptions" class="text-danger"></span>
             </div>
             <div class="form-group">
